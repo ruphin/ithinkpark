@@ -1,0 +1,10 @@
+*
+!index.html
+!images
+!node_modules
+node_modulex/*
+!node_modules/lit-html
+!node_modules/gluon*
+!node_modules/slidem
+!node_modules/overwebs*
+!node_modules/fontfaceobserver

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<meta name="theme-color" content="#FF2A69">
+<meta property="og:title" content="Slide'm Slide Deck" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Slide'm - Web Components you can use to write your slide deck in HTML" />
+<meta property="og:description" content="Slide'm  - Web Components you can use to write your slide deck in HTML" />
+<link rel="canonical" href="https://slidem.ruph.in/" />
+<meta property="og:url" content="https://slidem.ruph.in/" />
+<meta property="og:site_name" content="Slide'm Slide Deck" />
+
+<script type="module" src="node_modules/slidem/slidem-deck.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+
+<script type="module" src="node_modules/overwebs-play-tile/overwebs-play-tile.js"></script>
+
+<script>
+  window.modulesAssetPath = function (module) {
+    return `node_modules/${module}`;
+  }
+
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v16/oMMgfZMQthOryQo9n22dcuvvDin1pK8aKteLpeZ5c0A.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Roboto Medium'), local('Roboto-Medium'), url(https://fonts.gstatic.com/s/roboto/v16/RxZJdnzeo3R5zSexge8UUZBw1xU1rKptJj_0jans920.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v16/d-6IYplOFocCacKzxwXSOJBw1xU1rKptJj_0jans920.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v16/mnpfi9pxYH-Go5UiibESIpBw1xU1rKptJj_0jans920.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+  :root {
+    --pink: #e9437a;
+    --blue: #2e9be6;
+    /* --dark: #263238; */
+    --dark: #272822;
+    --code: #272822;
+    --slidem-content-height: 920px;
+    --slidem-content-width: 1760px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  slidem-deck[loading] {
+    display: none;
+  }
+
+  .introSlide {
+    overflow: hidden;
+    border-bottom: 3px solid white;
+    color: white;
+    position: relative;
+    height: 100%;
+  }
+
+  .topShade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 34px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .introSlide .event {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .introSlide .side {
+    position: absolute;
+    right: 0;
+    width: 340px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+  }
+
+  .introSlide .side * {
+    flex-shrink: 0;
+  }
+
+  .introSlide .avatar {
+    border-radius: 50%;
+    background-image: url(/images/avatar.jpg);
+    background-size: cover;
+    height: 340px;
+    margin-bottom: 56px;
+  }
+
+  .introSlide .speakerDetails {
+    border-top: 3px solid white;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+
+
+  .introSlide .speakerDetails div {
+    font-weight: 400;
+    margin-bottom: 20px;
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+
+  .introSlide .speakerDetails a {
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+
+  .introSlide .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 260px;
+    background-color: white;
+  }
+
+  .introSlide .logo .p {
+    height: 200px;
+    width: 300px;
+    background-image: url(/images/polymer.png);
+    background-position: center;
+    background-size: contain;
+  }
+
+  .introSlide h1 {
+    margin-top: 190px;
+    font-weight: 500;
+    font-size: 150px;
+    color: white;
+    letter-spacing: 2px;
+  }
+
+  .introSlide .subtitle {
+    display: inline-block;
+    margin-top: 40px;
+    font-weight: 400;
+    font-size: 100px;
+    letter-spacing: 2px;
+    color: white;
+    padding-top: 40px;
+    border-top: 3px solid white;
+  }
+
+  .introSlide .project h2 {
+    margin-top: 70px;
+    font-size: 100px;
+  }
+
+  .introSlide .project p {
+    margin-top: 20px;
+  }
+
+  .logoSlide h2 {
+    background: var(--pink);
+    display: inline-block;
+    padding: 20px;
+  }
+
+  .logos img {
+    margin: 30px;
+  }
+
+  .requirementSlide {
+    position: relative;
+    font-size: 120px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: black;
+  }
+
+  .requirementSlide p,
+  .requirementSlide h3 {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .requirementSlide .emoji {
+    flex-shrink: 0;
+    margin-bottom: -20px;
+  }
+
+  .requirementSlide h3 {
+    margin-bottom: 30px;
+  }
+
+  .requirementSlide .reveals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: white;
+  }
+
+  .requirementSlide .reveals>* {
+    background: var(--blue);
+  }
+
+  .reactCodeSlide {
+    position: relative;
+  }
+
+  .reactCodeSlide .comment {
+    position: absolute;
+    bottom: -140px;
+    right: 200px;
+    font-size: 100px;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+
+  .centerCallout {
+    display: inline-block;
+    padding: 40px;
+    color: white;
+    background: var(--pink);
+    font-weight: 700;
+    font-size: 120px;
+    letter-spacing: 2px;
+  }
+
+  .centerCallout.blue {
+    background: var(--blue);
+  }
+
+  .overlay {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  [scale="1.5"] {
+    transform: scale(1.5);
+  }
+
+  [scale="1.6"] {
+    transform: scale(1.6);
+  }
+
+  [scale="2"] {
+    transform: scale(2);
+  }
+</style>
+
+<!-- build:remove -->
+<span id="browser-sync-binding"></span>
+<!-- endbuild -->
+
+<slidem-deck font="Roboto" loading>
+  <slidem-slide slide-out background="--blue">
+    <div class="topShade"></div>
+    <div class="introSlide">
+      <div class="side">
+        <div class="avatar"></div>
+        <div class="speakerDetails">
+          <div>Goffert van Gool</div>
+          <div>
+            <a href="mailto:ruphin@ruphin.net">ruphin@ruphin.net</a>
+          </div>
+          <div>
+            <a href="https://twitter.com/ruphin_">@ruphin_</a>
+          </div>
+        </div>
+        <div class="logo">
+          <div class="p"></div>
+        </div>
+      </div>
+      <div class="event">
+        <p>iThinkPark Nürnberg 2017</p>
+      </div>
+      <h1>Polymer</h1>
+      <p class="subtitle">Past and Future</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide class="logoSlide" center zoom background="--dark">
+    <div scale="1.6">
+      <div center>
+        <h2 color="white" center>2013</h2>
+      </div>
+      <div reveal center>
+        <div class="logos">
+          <img src="/images/angular.png">
+          <img src="/images/ember.png">
+          <img src="/images/react.png">
+        </div>
+      </div>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--blue">
+    <div class="requirementSlide">
+      <h3 color="white">Building Applications</h3>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img src="/images/reactSlide.png" width="80%">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in slide-out class="reactSlide" background="black">
+    <h3 uppercase fit color="white">The web is awesome</h3>
+    <div center>
+      <img src="/images/awesome.gif" width="70%">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center zoom background="--dark">
+    <div center>
+      <img src="/images/js.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div class="reactCodeSlide" center>
+      <img src="/images/reactSlide.png" width="80%">
+      <div reveal class="comment">
+        <img src="/images/arrowUp.png">
+        <p>Not actually HTML</p>
+      </div>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--dark">
+    <div center>
+      <img src="/images/reactCompiled.png" width="80%">
+    </div>
+  </slidem-slide>
+
+
+  <slidem-slide center slide-in slide-out background="--dark">
+    <div center>
+      <img src="/images/disappointed.gif" width="60%">
+    </div>
+  </slidem-slide>
+
+
+  <slidem-slide center background="/images/reactBundled.png">
+    <div center>
+      <p reveal class="centerCallout">644kb</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--dark">
+    <div center>
+      <img src="/images/disgust.gif" width="70%">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--blue">
+    <div center>
+      <img src="/images/stupidChrome.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="/images/smoke.jpg">
+    <div center>
+      <img src="/images/js.png" width="16%">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="/images/future.jpg">
+    <div center reveal>
+      <img src="/images/polymer.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="/images/patchroom.jpg">
+    <div center>
+      <p class="centerCallout">Standards</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in slide-out background="--blue">
+    <div class="requirementSlide">
+      <h3>Component Model</h3>
+      <p>Code Organisation</p>
+      <p>Encapsulation</p>
+      <p>Packaging &amp; Distribution</p>
+      <div class="reveals">
+        <h3 reveal>Web Components</h3>
+        <p reveal>Custom Elements</p>
+        <p reveal>Shadow DOM</p>
+        <p reveal>HTML Imports</p>
+      </div>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center zoom background="--dark">
+    <div center>
+      <img scale="1.6" src="/images/polymer.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img scale="2" src="/images/polymer2Code.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img scale="2" src="/images/polymerButton.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img scale="2" src="/images/vanillaButton.png">
+    </div>
+    <div center class="overlay">
+      <p reveal class="centerCallout">0kb</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img scale="2" src="/images/eddiePerfect.gif">
+    </div>
+  </slidem-slide>
+
+
+  <slidem-slide center slide-in background="--blue">
+    <div class="requirementSlide">
+      <h3 color="white">Web Components
+        <img reveal class="emoji" src="/images/coolEmoji.png" alt="">
+      </h3>
+      <p color="white">Custom Elements
+        <img reveal class="emoji" src="/images/coolEmoji.png" alt="">
+      </p>
+      <p color="white">Shadow DOM
+        <img reveal class="emoji" src="/images/coolEmoji.png" alt="">
+      </p>
+      <p color="white">HTML Imports
+        <img reveal class="emoji" src="/images/sadEmoji.png" alt="">
+      </p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="/images/toModules.png"></slidem-slide>
+
+  <slidem-slide center slide-in background="white">
+    <div center>
+      <img scale="1.5" src="/images/support.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center background="white">
+    <div center>
+      <img scale="1.5" src="/images/supportBoxed.png">
+    </div>
+    <div center class="overlay">
+      <p reveal class="centerCallout blue">44.7%</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center>
+      <img scale="2" src="/images/polymer3Code.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center background="--code">
+    <div center>
+      <img scale="2" src="/images/polymer3CodeNasty.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in slide-out background="--dark">
+    <div center>
+      <img src="/images/eddieDisappointed.gif" width="70%">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center zoom background="--code">
+    <div center>
+      <p scale="2.0" class="centerCallout blue">lit-html</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center scale="2">
+      <img src="/images/playTileCode.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--code">
+    <div center scale="2">
+      <img src="/images/overwebsSlideCode.png">
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in slide-out background="--code">
+    <div center scale="1.5">
+      <overwebs-play-tile quick-play>
+        <div slot="title">Web Components</div>
+        <div slot="description">They totally work</div>
+      </overwebs-play-tile>
+    </div>
+    <div center class="overlay">
+      <p reveal class="centerCallout">37kb</p>
+    </div>
+  </slidem-slide>
+
+  <slidem-slide center slide-in background="--dark">
+    <div center>
+      <img src="/images/eddieApproves.gif" width="70%">
+    </div>
+  </slidem-slide>
+
+
+  <slidem-slide slide-in slide-out background="--blue">
+    <div class="topShade"></div>
+    <div class="introSlide">
+      <div class="side">
+        <div class="avatar"></div>
+        <div class="speakerDetails">
+          <div>Goffert van Gool</div>
+          <div>
+            <a href="mailto:ruphin@ruphin.net">ruphin@ruphin.net</a>
+          </div>
+          <div>
+            <a href="https://twitter.com/ruphin_">@ruphin_</a>
+          </div>
+        </div>
+        <div class="logo">
+          <div class="p"></div>
+        </div>
+      </div>
+      <div class="event">
+        <p>iThinkPark Nürnberg 2017</p>
+      </div>
+      <div class="project">
+        <h2>Slides</h2>
+        <p>
+          <a href="https://ithinkpark.ruph.in">https://ithinkpark.ruph.in</a>
+        </p>
+      </div>
+      <div reveal class="project">
+        <h2>Slide'm</h2>
+        <p>
+          <a href="https://slidem.ruph.in">https://slidem.ruph.in</a>
+        </p>
+        <p></p>
+      </div>
+      <div reveal class="project">
+        <h2>GluonJS</h2>
+        <p>
+          <a href="https://gluonjs.ruph.in">https://gluonjs.ruph.in</a>
+        </p>
+      </div>
+    </div>
+  </slidem-slide>
+
+
+  <slidem-slide center background="/images/keyboard.jpg">
+  </slidem-slide>
+
+  <slidem-slide slide-in background="--blue">
+    <div class="topShade"></div>
+    <div class="introSlide">
+      <div class="side">
+        <div class="avatar"></div>
+        <div class="speakerDetails">
+          <div>Goffert van Gool</div>
+          <div>
+            <a href="mailto:ruphin@ruphin.net">ruphin@ruphin.net</a>
+          </div>
+          <div>
+            <a href="https://twitter.com/ruphin_">@ruphin_</a>
+          </div>
+        </div>
+        <div class="logo">
+          <div class="p"></div>
+        </div>
+      </div>
+      <div class="event">
+        <p>iThinkPark Nürnberg 2017</p>
+      </div>
+      <h1>Thank you</h1>
+      <p reveal class="subtitle">Questions?</p>
+    </div>
+  </slidem-slide>
+
+</slidem-deck>
