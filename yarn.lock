@@ -2686,9 +2686,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slidem@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/slidem/-/slidem-0.1.1.tgz#0991bd86244fe7d0102a41977104da80182874a0"
+slidem@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/slidem/-/slidem-0.1.2.tgz#2b2406229f86df435c4237a281565c13688d56bd"
   dependencies:
     fontfaceobserver "^2.0.13"
     gluon-keybinding "^0.0.1"
