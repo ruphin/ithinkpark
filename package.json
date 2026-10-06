@@ -1,18 +1,16 @@
 {
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-minify": "^0.2.0",
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-sourcemaps": "^2.6.1"
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "slidem": "^0.1.2",
-    "overwebs-play-tile": "^0.0.1"
+    "overwebs-play-tile": "^0.0.1",
+    "slidem": "^0.1.2"
   },
-  "scripts": {
-    "build": "gulp",
-    "dev": "gulp serve"
+  "devDependencies": {
+    "vite": "^8.3.3"
   }
 }
